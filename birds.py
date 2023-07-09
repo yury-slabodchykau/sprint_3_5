@@ -13,16 +13,19 @@ class Parrot(Bird):
         self.color = color
 
     def describe(self, full=False):
-        self.full = full
-        if not full:
-            return super().describe()
-        else:
+        if full:
             return (f'Попугай {self.name} — заметная птица, '
-                    f'окрас её перьев — {self.color}, а размер — {self.size}. '
-                    f'Интересный факт: попугаи чувствуют ритм, '
-                    f'а вовсе не бездумно двигаются под музыку. '
-                    f'Если сменить композицию, '
-                    f'то и темп движений птицы изменится.')
+                    f'окрас её перьев — {self.color}, '
+                    f'а размер — {self.size}. '
+                    'Интересный факт: попугаи чувствуют ритм, '
+                    'а вовсе не бездумно двигаются под музыку. '
+                    'Если сменить композицию, '
+                    'то и темп движений птицы изменится.')
+        return super().describe()
+
+    def repeat(self, phraze):
+        self.phraze = phraze
+        return f'Попугай {self.name} говорит: {self.phraze}.'
 
 
 class Penguin(Bird):
@@ -31,22 +34,24 @@ class Penguin(Bird):
         self.genus = genus
 
     def describe(self, full=False):
-        self.full = full
-        if not full:
-            return super().describe()
-        else:
-            return (f'Размер пингвина {self.name} из рода {self.genus} — '
-                    f'{self.size}. '
-                    f'Интересный факт: однажды группа геологов-разведчиков '
-                    f'похитила пингвинье яйцо, и их принялась преследовать вся'
-                    f' стая, не пытаясь, впрочем, при этом нападать.'
-                    f' Посовещавшись, похитители вернули птицам яйцо,'
-                    f' и те отстали.')
+        if full:
+            return (f'Размер пингвина {self.name} '
+                    f'из рода {self.genus} — {self.size}. '
+                    'Интересный факт: однажды группа геологов-разведчиков '
+                    'похитила пингвинье яйцо, '
+                    'и их принялась преследовать вся стая, '
+                    'не пытаясь, впрочем, при этом нападать. '
+                    'Посовещавшись, похитители вернули птицам яйцо, '
+                    'и те отстали. ')
+        return super().describe()
+
+    def swimming(self):
+        return f'Пингвин {self.name} плавает со средней скоростью 11 км/ч.'
 
 
 kesha = Parrot('Ара', 'средний', 'красный')
 kowalski = Penguin('Королевский', 'большой', 'Aptenodytes')
 
 
-print(kesha.describe())
-print(kowalski.describe(True))
+print(kesha.repeat('Кеша хороший!'))
+print(kowalski.swimming())
